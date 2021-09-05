@@ -1,22 +1,32 @@
+import { Link } from 'react-router-dom';
+
 function Menu() {
   return (
     <nav>
       <ul>
         <li>
-          <i></i>
-          <p>일정</p>
+          <Link to="/home">
+            <i></i>
+            <p>일정</p>
+          </Link>
         </li>
         <li>
-          <i></i>
-          <p>라이브</p>
+          <Link to="/live">
+            <i></i>
+            <p>라이브</p>
+          </Link>
         </li>
         <li>
-          <i></i>
-          <p>랭킹</p>
+          <Link to="/rank">
+            <i></i>
+            <p>랭킹</p>
+          </Link>
         </li>
         <li>
-          <i></i>
-          <p>마이페이지</p>
+          <Link to="/my">
+            <i></i>
+            <p>마이페이지</p>
+          </Link>
         </li>
       </ul>
     </nav>

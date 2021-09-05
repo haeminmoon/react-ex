@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { shoppingOnAirLogo } from '../assets/images';
 
 function Header() {
@@ -5,7 +6,9 @@ function Header() {
     <header>
       <div>
         <h1>
-          <img src={shoppingOnAirLogo} alt="쇼핑온에어 로고 이미지" />
+          <Link to="/">
+            <img src={shoppingOnAirLogo} alt="쇼핑온에어 로고 이미지" />
+          </Link>
         </h1>
         <div>
           <button>서치</button>
