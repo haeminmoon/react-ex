@@ -1,20 +1,22 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+
+import loadable from '@loadable/component';
 import AppLayout from './components/AppLayout';
 
-import Home from './pages/Home';
+const Home = loadable(() => import('./pages/Home'));
+const Live = loadable(() => import('./pages/Live'));
 
 function App() {
   return (
-    <>
-      <Switch>
-        <AppLayout>
-          <AppLayout.Main>
-            <Route path="/home" component={Home} />
-            <Redirect path="/" to="/home" exact />
-          </AppLayout.Main>
-        </AppLayout>
-      </Switch>
-    </>
+    <AppLayout>
+      <AppLayout.Main>
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/live" component={Live} />
+          <Redirect from="/" to="/home" />
+        </Switch>
+      </AppLayout.Main>
+    </AppLayout>
   );
 }
 

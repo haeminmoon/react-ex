@@ -5,7 +5,7 @@ type AppLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AppLayout({ children }: AppLayoutProps) {
+function AppLayout({ children }: AppLayoutProps) {
   return <div>{children}</div>;
 }
 
@@ -33,3 +33,5 @@ function Main({ children }: MainProps) {
 
 AppLayout.Side = Side;
 AppLayout.Main = Main;
+
+export default AppLayout;
