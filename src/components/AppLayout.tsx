@@ -9,14 +9,6 @@ function AppLayout({ children }: AppLayoutProps) {
   return <div>{children}</div>;
 }
 
-type SideProps = {
-  children: React.ReactNode;
-};
-
-function Side({ children }: SideProps) {
-  return <aside>{children}</aside>;
-}
-
 type MainProps = {
   children: React.ReactNode;
 };
@@ -31,7 +23,6 @@ function Main({ children }: MainProps) {
   );
 }
 
-AppLayout.Side = Side;
 AppLayout.Main = Main;
 
 export default AppLayout;
