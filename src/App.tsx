@@ -1,15 +1,20 @@
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import AppLayout from './components/AppLayout';
 
 import Home from './pages/Home';
 
 function App() {
   return (
-    <Router>
+    <>
       <Switch>
-        <Route path="/home" component={Home} />
-        <Redirect path="/" to="/home" exact />
+        <AppLayout>
+          <AppLayout.Main>
+            <Route path="/home" component={Home} />
+            <Redirect path="/" to="/home" exact />
+          </AppLayout.Main>
+        </AppLayout>
       </Switch>
-    </Router>
+    </>
   );
 }
 
