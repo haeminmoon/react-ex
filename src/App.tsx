@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import loadable from '@loadable/component';
-import AppLayout from './components/AppLayout';
+import AppLayout from './layouts/AppLayout';
 
 const Home = loadable(() => import('./pages/Home'));
 const Live = loadable(() => import('./pages/Live'));

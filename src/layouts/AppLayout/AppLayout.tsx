@@ -1,5 +1,5 @@
-import Header from './Header';
-import Menu from './Menu';
+import Header from '../../components/Header';
+import Menu from '../../components/Menu';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -19,6 +19,7 @@ function Main({ children }: MainProps) {
       <Header />
       <div className="h-16" />
       {children}
+      <div className="h-16 my-1" />
       <Menu />
     </main>
   );

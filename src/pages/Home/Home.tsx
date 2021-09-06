@@ -1,4 +1,4 @@
-import Categries from '~/components/Categries';
+import Categries from '~/components/Categires/Categries';
 import ImageCarousel from '~/components/ImageCarousel/ImageCarousel';
 import Feed from '~/components/Feed';
 

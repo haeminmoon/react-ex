@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { shoppingOnAirLogo } from '../assets/images';
+import { shoppingOnAirLogo } from '../../assets/images';
 import { NotificationIcon, SearchIcon } from '~/assets/icons';
 
 function Header() {

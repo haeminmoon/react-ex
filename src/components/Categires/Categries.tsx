@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { categories } from '~/constants/mock';
 
-import HorizontalCarousel from './HorizontalCarousel';
+import HorizontalCarousel from '../HorizontalCarousel';
 
 function Categries() {
   const location = useLocation();
