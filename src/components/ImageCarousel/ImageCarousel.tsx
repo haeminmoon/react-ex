@@ -5,8 +5,13 @@ import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/pagination.css';
 import './index.scss';
 
+type Resource = {
+  src: string;
+  link?: string;
+};
+
 type ImageCarouselProps = {
-  resources?: string[];
+  resources?: Resource[];
   children?: React.ReactChild;
 };
 
