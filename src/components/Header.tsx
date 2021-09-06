@@ -4,7 +4,7 @@ import { NotificationIcon, SearchIcon } from '~/assets/icons';
 
 function Header() {
   return (
-    <header className="w-full py-5 px-4 sticky top-0 border-b border-gray-200">
+    <header className="w-full py-5 px-4 fixed top-0 border-b border-gray-200 bg-white z-50">
       <div className="flex justify-between items-center">
         <h1 className="w-40 mx-2">
           <Link to="/">

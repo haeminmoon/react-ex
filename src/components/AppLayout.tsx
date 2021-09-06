@@ -17,6 +17,7 @@ function Main({ children }: MainProps) {
   return (
     <main className="relative h-full">
       <Header />
+      <div className="h-16" />
       {children}
       <Menu />
     </main>
