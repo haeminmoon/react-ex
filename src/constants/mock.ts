@@ -26,7 +26,7 @@ export const eventBanners = [
   },
 ];
 
-export const productList = [
+export const liveList = [
   {
     id: 1,
     title: '베스킨라빈스 9월의 맛 대공개!!',

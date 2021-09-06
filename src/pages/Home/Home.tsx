@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { eventBanners } from '~/constants/mock';
+import { useLocation } from 'react-router-dom';
+import { eventBanners, liveList } from '~/constants/mock';
 
 import Categries from '~/components/Categires/Categries';
 import ImageCarousel from '~/components/ImageCarousel/ImageCarousel';
@@ -7,14 +8,18 @@ import Feed from '~/components/Feed';
 import FilterModal from '~/components/FilterModal';
 
 function Home() {
+  const location = useLocation();
+  const [, categoryId] = location.search.split('?category=');
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
+
+  const filterLiveList = liveList.filter(item => (+categoryId === 0 ? item : item.categoryId === +categoryId));
 
   return (
     <>
       <ImageCarousel resources={eventBanners} />
-      <Categries onFilterModal={() => setFilterVisible(true)} />
-      <Feed />
-      <FilterModal visible={filterVisible} onClose={() => setFilterVisible(false)} />
+      <Categries categoryId={+categoryId} onFilterModal={() => setFilterVisible(true)} />
+      <Feed liveList={filterLiveList} />
+      {filterVisible && <FilterModal visible={filterVisible} onClose={() => setFilterVisible(false)} />}
     </>
   );
 }

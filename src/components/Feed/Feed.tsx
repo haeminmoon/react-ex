@@ -1,11 +1,15 @@
 import LiveItem from '../LiveItem';
-import { productList } from '~/constants/mock';
+import { live } from '../LiveItem/LiveItem';
 
-function Feed() {
+type FeedProps = {
+  liveList: live[];
+};
+
+function Feed({ liveList }: FeedProps) {
   return (
     <section className="p-6 grid gap-6">
-      {productList.map(product => (
-        <LiveItem product={product} key={product.id} />
+      {liveList.map(live => (
+        <LiveItem live={live} key={live.id} />
       ))}
     </section>
   );
