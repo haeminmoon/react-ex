@@ -10,7 +10,7 @@ function Menu() {
       <ul className="grid grid-cols-4 items-end gap-2 text-center text-xs">
         {MenuData.map((menu, index) => (
           <li key={`menu-${index}`}>
-            <NavLink to={menu.link} activeClassName="active-menu">
+            <NavLink to={menu.link} activeClassName="active-menu" className="menu-item">
               <i>
                 {menu.icon ? (
                   <SvgIcon component={menu.icon} />
