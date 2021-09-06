@@ -6,7 +6,12 @@ type AppLayoutProps = {
 };
 
 function AppLayout({ children }: AppLayoutProps) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <div id="root-portal"></div>
+    </>
+  );
 }
 
 type MainProps = {
@@ -17,9 +22,9 @@ function Main({ children }: MainProps) {
   return (
     <main className="relative h-full">
       <Header />
-      <div className="h-16" />
+      <div className="h-16"></div>
       {children}
-      <div className="h-16 my-1" />
+      <div className="h-16 my-1"></div>
       <Menu />
     </main>
   );
