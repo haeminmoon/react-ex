@@ -8,14 +8,14 @@ import './index.scss';
 type Resource = {
   src: string;
   link?: string;
+  event?: string;
 };
 
 type ImageCarouselProps = {
   resources?: Resource[];
-  children?: React.ReactChild;
 };
 
-function ImageCarousel({ resources, children }: ImageCarouselProps) {
+function ImageCarousel({ resources }: ImageCarouselProps) {
   const _plugins = [
     new Pagination({ type: 'bullet' }),
     new AutoPlay({ duration: 3000, direction: 'NEXT', stopOnHover: true }),
@@ -23,10 +23,13 @@ function ImageCarousel({ resources, children }: ImageCarouselProps) {
 
   return (
     <Flicking circular={true} plugins={_plugins}>
-      {children}
-      <div className="w-full h-52 bg-red-200">1</div>
-      <div className="w-full h-52 bg-blue-200">2</div>
-      <div className="w-full h-52 bg-green-200">3</div>
+      {resources?.map((resource, index) => (
+        <div className="w-full h-52 bg-gray-100" key={`${resource.event}-${index}`}>
+          <a href={resource.link} key={resource.link} className="block w-full h-full">
+            <img src={resource.src} alt="이벤트 배너" className="object-cover w-full h-full" />
+          </a>
+        </div>
+      ))}
       <ViewportSlot>
         <div className="flicking-pagination"></div>
       </ViewportSlot>
