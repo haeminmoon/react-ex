@@ -1,15 +1,29 @@
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Home from './pages/Home';
+import loadable from '@loadable/component';
+import AppLayout from './layouts/AppLayout';
+
+const Home = loadable(() => import('./pages/Home'));
+const Live = loadable(() => import('./pages/Live'));
+const Rank = loadable(() => import('./pages/Rank'));
+const My = loadable(() => import('./pages/My'));
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/home" component={Home} />
-        <Redirect path="/" to="/home" exact />
-      </Switch>
-    </Router>
+    <AppLayout>
+      <AppLayout.Main>
+        <Switch>
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/live" component={Live} />
+          <Route exact path="/rank" component={Rank} />
+          <Route exact path="/my" component={My} />
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Redirect exact path="*" to="/" />
+        </Switch>
+      </AppLayout.Main>
+    </AppLayout>
   );
 }
 

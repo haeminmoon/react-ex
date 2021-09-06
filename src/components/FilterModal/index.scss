@@ -1,0 +1,7 @@
+.modal-box {
+  transform: translateY(440px);
+  transition: 0.5s ease-in-out;
+  &.visible {
+    transform: translateY(0);
+  }
+}
