@@ -30,7 +30,7 @@ function FilterModal({ visible, onClose }: FilterModalProps) {
               <CloseIcon className="text-gray-500" />
             </button>
           </div>
-          <div className="modal-container max-h-80 py-4 px-6 overflow-auto overflow-y-scroll">
+          <div className="modal-container py-4 px-6 overflow-auto overflow-y-scroll">
             <ul>
               <li className="p-2">플랫폼 전체 선택</li>
               <li className="p-2">네이버 쇼핑라이브</li>
