@@ -1,11 +1,11 @@
 export const categories = [
-  { id: 1, category: 'all', text: '전체' },
-  { id: 2, category: 'food', text: '식품 • 건강' },
-  { id: 3, category: 'beauty', text: '뷰티' },
-  { id: 4, category: 'fashion', text: '패션 • 잡화' },
-  { id: 5, category: 'life', text: '생활 • 가전' },
-  { id: 6, category: 'child', text: '유아 • 아동' },
-  { id: 7, category: 'etc', text: '기타' },
+  { id: 0, category: 'all', text: '전체' },
+  { id: 1, category: 'food', text: '식품 • 건강' },
+  { id: 2, category: 'beauty', text: '뷰티' },
+  { id: 3, category: 'fashion', text: '패션 • 잡화' },
+  { id: 4, category: 'life', text: '생활 • 가전' },
+  { id: 5, category: 'child', text: '유아 • 아동' },
+  { id: 6, category: 'etc', text: '기타' },
 ];
 
 export const eventBanners = [
