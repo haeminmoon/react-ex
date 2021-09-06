@@ -1,10 +1,16 @@
+import Categries from '~/components/Categries';
 import ImageCarousel from '~/components/ImageCarousel/ImageCarousel';
+import Feed from '~/components/Feed';
+
+import { eventBanners } from '~/constants/mock';
 
 function Home() {
   return (
-    <div>
-      <ImageCarousel />
-    </div>
+    <>
+      <ImageCarousel resources={eventBanners} />
+      <Categries />
+      <Feed />
+    </>
   );
 }
 
