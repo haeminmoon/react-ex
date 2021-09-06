@@ -30,8 +30,12 @@ export const productList = [
   {
     id: 1,
     title: '베스킨라빈스 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 1,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
@@ -39,8 +43,12 @@ export const productList = [
   {
     id: 2,
     title: '독샤워의 쇼핑라이브',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 2,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
@@ -48,8 +56,12 @@ export const productList = [
   {
     id: 3,
     title: '베 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 11,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 11,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 2,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDFfMjcy/MDAxNjMwNDg0NzUyNDQ0.tidbYxVNUad5ApEDiK5M08qMLQY7RlS6RsGu-yZKUjog.ZpbmkXrJW_V72Fo8ahhocJZK4w54RcMwEbOsnE_kzGgg.PNG/%EC%95%84%EB%B3%B4%EB%A6%AC%EB%8D%A4_%EC%98%88%EA%B3%A0%ED%8E%98%EC%9D%B4%EC%A7%80%28MO%29.png?type=w800_q80',
@@ -57,8 +69,12 @@ export const productList = [
   {
     id: 4,
     title: '베스 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 3,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDFfMjcy/MDAxNjMwNDg0NzUyNDQ0.tidbYxVNUad5ApEDiK5M08qMLQY7RlS6RsGu-yZKUjog.ZpbmkXrJW_V72Fo8ahhocJZK4w54RcMwEbOsnE_kzGgg.PNG/%EC%95%84%EB%B3%B4%EB%A6%AC%EB%8D%A4_%EC%98%88%EA%B3%A0%ED%8E%98%EC%9D%B4%EC%A7%80%28MO%29.png?type=w800_q80',
@@ -66,8 +82,12 @@ export const productList = [
   {
     id: 5,
     title: '베스킨 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 2,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDFfMjcy/MDAxNjMwNDg0NzUyNDQ0.tidbYxVNUad5ApEDiK5M08qMLQY7RlS6RsGu-yZKUjog.ZpbmkXrJW_V72Fo8ahhocJZK4w54RcMwEbOsnE_kzGgg.PNG/%EC%95%84%EB%B3%B4%EB%A6%AC%EB%8D%A4_%EC%98%88%EA%B3%A0%ED%8E%98%EC%9D%B4%EC%A7%80%28MO%29.png?type=w800_q80',
@@ -75,8 +95,12 @@ export const productList = [
   {
     id: 6,
     title: '베스킨라 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 12,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 12,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 4,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDFfMjcy/MDAxNjMwNDg0NzUyNDQ0.tidbYxVNUad5ApEDiK5M08qMLQY7RlS6RsGu-yZKUjog.ZpbmkXrJW_V72Fo8ahhocJZK4w54RcMwEbOsnE_kzGgg.PNG/%EC%95%84%EB%B3%B4%EB%A6%AC%EB%8D%A4_%EC%98%88%EA%B3%A0%ED%8E%98%EC%9D%B4%EC%A7%80%28MO%29.png?type=w800_q80',
@@ -84,8 +108,12 @@ export const productList = [
   {
     id: 7,
     title: '베스킨라빈 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 12,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 12,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 2,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
@@ -93,8 +121,12 @@ export const productList = [
   {
     id: 8,
     title: '베스킨라빈스 9월의 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 12,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 12,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 2,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
@@ -102,8 +134,12 @@ export const productList = [
   {
     id: 9,
     title: '베스킨라빈스 9월 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 6,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
@@ -111,8 +147,12 @@ export const productList = [
   {
     id: 10,
     title: '베스킨라빈스 맛 대공개!!',
-    liveDate: new Date(),
-    supplierId: 10,
+    liveDate: new Date().toISOString(),
+    supplier: {
+      id: 10,
+      name: '네이버쇼핑라이브',
+      logo: 'https://blog.kakaocdn.net/dn/bFqsNQ/btqU52Dnzok/UH8mIODqDeOdbtg6ijUoM1/img.jpg',
+    },
     categoryId: 7,
     thumbnail:
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
