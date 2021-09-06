@@ -19,8 +19,7 @@ code {
 }
 
 button {
-  outline: none;
-  border: none;
   background: none;
+  outline: none;
   cursor: pointer;
 }

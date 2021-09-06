@@ -1,14 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
+import { ChannelIcon } from '~/assets/icons';
 import { categories } from '~/constants/mock';
-
 import HorizontalCarousel from '../HorizontalCarousel';
 
-function Categries() {
+type CategriesProps = {
+  onFilterModal: () => void;
+};
+
+function Categries({ onFilterModal }: CategriesProps) {
   const location = useLocation();
   const [, categoryId] = location.search.split('?category=');
 
   return (
-    <div className="w-full px-2 border-b border-gray-200">
+    <div className="w-full pl-2 border-b border-gray-200 flex">
       <HorizontalCarousel>
         {categories.map(category => (
           <Link
@@ -20,6 +24,10 @@ function Categries() {
           </Link>
         ))}
       </HorizontalCarousel>
+      <button className="w-32 align-middle text-sm shadow-left" onClick={onFilterModal}>
+        <ChannelIcon fontSize="small" />
+        <span>채널</span>
+      </button>
     </div>
   );
 }
