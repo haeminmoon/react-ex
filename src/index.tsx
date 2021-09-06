@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
-import '../src/lib/styles/tailwind.css';
+import '../src/libs/styles/tailwind.css';
 
 ReactDOM.render(
   <React.StrictMode>
