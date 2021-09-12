@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 
 import './index.scss';
@@ -14,6 +14,10 @@ type LiveProps = {
 
 function Live(props: LiveProps) {
   const [muted, setMuted] = useState<boolean>(true);
+
+  useEffect(() => {
+    setMuted(true);
+  }, [props]);
 
   const onMuted = () => {
     setMuted(prev => !prev);
