@@ -11,7 +11,7 @@ type CategriesProps = {
 
 function Categries({ categoryId, onFilterModal }: CategriesProps) {
   return (
-    <div className="w-full pl-2 border-b border-gray-200 flex">
+    <div className="flex min-w-full pl-2 border-b border-gray-200">
       <HorizontalCarousel>
         {categories.map(category => (
           <Link
@@ -23,7 +23,7 @@ function Categries({ categoryId, onFilterModal }: CategriesProps) {
           </Link>
         ))}
       </HorizontalCarousel>
-      <button className="w-32 align-middle text-sm shadow-left" onClick={onFilterModal}>
+      <button className="w-32 text-sm align-middle shadow-left" onClick={onFilterModal}>
         <ChannelIcon fontSize="small" />
         <span>채널</span>
       </button>
