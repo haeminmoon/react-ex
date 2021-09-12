@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 
-import './index.css';
+import './index.scss';
 import '../src/libs/styles/tailwind.css';
 
 ReactDOM.render(
