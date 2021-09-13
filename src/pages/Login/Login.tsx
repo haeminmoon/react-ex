@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 
 import { login } from '../../utils/auth';
 
@@ -25,24 +25,26 @@ function Login() {
      */
     const isLoggedin = await login(Email, Password);
     if (isLoggedin) {
-      history.push('/Logout');
+      history.push('/loggedin');
     }
   }
 
-  return <div style={{
-    display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
-  }}>
-
-    <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onSubmitHandler}>
-      <label>Email</label>
-      <input type="text" value={Email} onChange={onEmailHandler} />
-      <label>Password</label>
-      <input type="password" value={Password} onChange={onPasswordHandler}/>
-      <br />
-      <button>Login</button>
-    </form>
-
-  </div>;
+  return (
+    <div style={{
+      display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
+    }}>
+  
+      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onSubmitHandler}>
+        <label>Email</label>
+        <input type="text" value={Email} onChange={onEmailHandler} />
+        <label>Password</label>
+        <input type="password" value={Password} onChange={onPasswordHandler}/>
+        <br />
+        <button>Login</button>
+      </form>
+  
+    </div>
+  )
 }
 
-export default Login;
+export default withRouter(Login);

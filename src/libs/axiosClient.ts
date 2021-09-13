@@ -10,8 +10,7 @@ axiosClient.interceptors.response.use(
   (err: AxiosError) => {
     return new Promise((resolve, reject) => {
       if (err.response?.status === 401 && err.config) {
-        // 권한 에러 시, 로그아웃 처리
-        // this.setSession(null);
+        // 권한 에러 시, 처리코드
       }
       throw err;
     });
