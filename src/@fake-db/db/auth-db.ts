@@ -4,7 +4,7 @@ import { AxiosRequestConfig } from 'axios';
 
 const jwtConfig = {
 	secret: 'some-secret-code-goes-here',
-	expiresIn: '2 minute' // A numeric value is interpreted as a seconds count. If you use a string be sure you provide the time units (days, hours, etc)
+	expiresIn: '120 second' // A numeric value is interpreted as a seconds count. If you use a string be sure you provide the time units (days, hours, etc)
 };
 
 const authDB = {
@@ -50,26 +50,25 @@ mock.onGet('/api/login').reply((config: AxiosRequestConfig) => {
 	return [200, { error }];
 });
 
-// mock.onGet('/api/auth/access-token').reply(config => {
-// 	const data = JSON.parse(config.data);
-// 	const { access_token } = data;
+mock.onGet('/api/auth').reply((config: AxiosRequestConfig) => {
+  const data = JSON.parse(config.data);
+  const { accessToken } = data;
 
-// 	try {
-// 		const { id } = jwt.verify(access_token, jwtConfig.secret);
+  if (!!accessToken) {
+    const { id }: any = jwt.verify(accessToken, jwtConfig.secret);
+    const user = authDB.users.find(_user => _user.uuid === id);
 
-// 		const user = _.cloneDeep(authDB.users.find(_user => _user.uuid === id));
-// 		delete user.password;
+    // 토큰 리프레시 기준
+    // const updatedAccessToken = jwt.sign({ id: user?.uuid }, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn });
 
-// 		const updatedAccessToken = jwt.sign({ id: user.uuid }, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn });
+    const response = {
+      user,
+      // accessToken: updatedAccessToken
+    };
 
-// 		const response = {
-// 			user,
-// 			access_token: updatedAccessToken
-// 		};
-
-// 		return [200, response];
-// 	} catch (e) {
-// 		const error = 'Invalid access token detected';
-// 		return [401, { error }];
-// 	}
-// });
+    return [200, response];
+  } else {
+    return [200, {}]
+  }
+  
+});

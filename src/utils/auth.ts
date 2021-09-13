@@ -16,7 +16,7 @@ export async function login(email: string, password: string) {
    */
   if (!!response.data.accessToken) {
     setStorageItem(STORAGE_ITEMS.TOKEN, response.data.accessToken);
-    // axiosClient.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+    // axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
     return true;
   } else {
@@ -33,15 +33,25 @@ export async function login(email: string, password: string) {
   }
 }
 
+export async function auth() {
+  const response = await axiosClient.get('/api/auth', {
+    data: {
+      accessToken: getAccessToken()
+    }
+  });
+
+  return response.data;
+};
+
 export function logout() {
   setStorageItem(STORAGE_ITEMS.TOKEN, null);
 };
 
-export function isAuthTokenValid(access_token: string) {
-  if (!access_token) {
+export function isAuthTokenValid(accessToken: string | null) {
+  if (!accessToken) {
     return false;
   }
-  const decoded: any = jwtDecode(access_token);
+  const decoded: any = jwtDecode(accessToken);
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     console.warn('Access token expired');
