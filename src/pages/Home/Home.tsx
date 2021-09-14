@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { eventBanners, liveList } from '~/constants/mock';
 
+import Header from '~/components/Header';
 import Categries from '~/components/Categires/Categries';
 import ImageCarousel from '~/components/ImageCarousel/ImageCarousel';
 import Feed from '~/components/Feed';
@@ -12,10 +13,13 @@ function Home() {
   const [, categoryId] = location.search.split('?category=');
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
 
-  const filterLiveList = liveList.filter(item => (+categoryId === 0 ? item : item.categoryId === +categoryId));
+  const filterLiveList = !categoryId
+    ? liveList
+    : liveList.filter(item => (+categoryId === 0 ? item : item.categoryId === +categoryId));
 
   return (
     <>
+      <Header />
       <ImageCarousel resources={eventBanners} />
       <Categries categoryId={+categoryId} onFilterModal={() => setFilterVisible(true)} />
       <Feed liveList={filterLiveList} />

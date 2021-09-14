@@ -158,3 +158,72 @@ export const liveList = [
       'https://g-selected.pstatic.net/MjAyMTA5MDJfMjgw/MDAxNjMwNTYzMzQ4NDQ3.DYbFxcvyF2gsAHWZujM0e0ATmrIkT2MlqwL9ng9JIh8g.XP7DCekpwHsbN7IFcG0wK3pWZmBCf2BabdaNvn9jDI8g.JPEG/image.jpg?type=w800_q80',
   },
 ];
+
+export const liveData = [
+  {
+    id: 1,
+    title: '[한가위 풍성한할인 대잔치] 프리미엄 표고버섯 선물세트',
+    videoImage:
+      'https://g-selected.pstatic.net/MjAyMTA5MTBfMjM2/MDAxNjMxMjUxNjM1MjIw.N4dZba6HLShqzZM7JHH44GQUsLLtAt47K1saJrPJFYsg.hTiSXU2dbrFbVKNvTMkJLO9BNyzl0m-2uY5LTtSTp1Ig.JPEG/31761687552168142_615555975.jpg?type=f720_1280_q80',
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+  },
+  {
+    id: 2,
+    title: 'The first Blender Open Movie from 2006',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg',
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+  },
+  {
+    id: 3,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg',
+    title: 'For Bigger Escape',
+  },
+  {
+    id: 4,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg',
+    title: 'For Bigger Fun',
+  },
+  {
+    id: 5,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg',
+    title: 'For Bigger Joyrides',
+  },
+  {
+    id: 6,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg',
+    title: 'For Bigger Meltdowns',
+  },
+  {
+    id: 7,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg',
+    title: 'Sintel',
+  },
+  {
+    id: 8,
+    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
+    mallName: '네이버 쇼핑라이브',
+    mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
+    videoImage:
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg',
+    title: 'Subaru Outback On Street And Dirt',
+  },
+];

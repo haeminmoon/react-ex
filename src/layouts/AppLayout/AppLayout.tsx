@@ -1,4 +1,3 @@
-import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 
 type AppLayoutProps = {
@@ -20,13 +19,10 @@ type MainProps = {
 
 function Main({ children }: MainProps) {
   return (
-    <main className="relative h-full">
-      <Header />
-      <div className="h-16"></div>
-      {children}
-      <div className="h-16 my-1"></div>
+    <>
+      <main>{children}</main>
       <Menu />
-    </main>
+    </>
   );
 }
 

@@ -6,8 +6,8 @@ import './index.scss';
 
 function Menu() {
   return (
-    <nav className="fixed bottom-0 w-full p-4 shadow-top bg-white z-50">
-      <ul className="grid grid-cols-4 items-end gap-2 text-center text-xs">
+    <nav className="fixed bottom-0 z-50 w-full p-4 bg-white shadow-top">
+      <ul className="grid items-end grid-cols-4 gap-2 text-xs text-center">
         {MenuData.map((menu, index) => (
           <li key={`menu-${index}`}>
             <NavLink to={menu.link} activeClassName="active-menu" className="menu-item">

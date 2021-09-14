@@ -4,8 +4,8 @@ import { NotificationIcon, SearchIcon } from '~/assets/icons';
 
 function Header() {
   return (
-    <header className="w-full py-5 px-4 fixed top-0 border-b border-gray-200 bg-white z-50">
-      <div className="flex justify-between items-center">
+    <header className="sticky top-0 z-50 w-full px-4 py-5 bg-white border-b border-gray-200">
+      <div className="flex items-center justify-between">
         <h1 className="w-40 mx-2">
           <Link to="/">
             <img src={shoppingOnAirLogo} alt="쇼핑온에어 로고 이미지" />
