@@ -162,7 +162,7 @@ export const liveList = [
 export const liveData = [
   {
     id: 1,
-    title: '[한가위 풍성한할인 대잔치] 프리미엄 표고버섯 선물세트',
+    title: '1[한가위 풍성한할인 대잔치] 프리미엄 표고버섯 선물세트',
     videoImage:
       'https://g-selected.pstatic.net/MjAyMTA5MTBfMjM2/MDAxNjMxMjUxNjM1MjIw.N4dZba6HLShqzZM7JHH44GQUsLLtAt47K1saJrPJFYsg.hTiSXU2dbrFbVKNvTMkJLO9BNyzl0m-2uY5LTtSTp1Ig.JPEG/31761687552168142_615555975.jpg?type=f720_1280_q80',
     videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -171,7 +171,7 @@ export const liveData = [
   },
   {
     id: 2,
-    title: 'The first Blender Open Movie from 2006',
+    title: '2The first Blender Open Movie from 2006',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg',
     videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     mallName: '네이버 쇼핑라이브',
@@ -183,7 +183,7 @@ export const liveData = [
     mallName: '네이버 쇼핑라이브',
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg',
-    title: 'For Bigger Escape',
+    title: '3For Bigger Escape',
   },
   {
     id: 4,
@@ -191,7 +191,7 @@ export const liveData = [
     mallName: '네이버 쇼핑라이브',
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg',
-    title: 'For Bigger Fun',
+    title: '4For Bigger Fun',
   },
   {
     id: 5,
@@ -199,7 +199,7 @@ export const liveData = [
     mallName: '네이버 쇼핑라이브',
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg',
-    title: 'For Bigger Joyrides',
+    title: '5For Bigger Joyrides',
   },
   {
     id: 6,
@@ -207,7 +207,7 @@ export const liveData = [
     mallName: '네이버 쇼핑라이브',
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg',
-    title: 'For Bigger Meltdowns',
+    title: '6For Bigger Meltdowns',
   },
   {
     id: 7,
@@ -215,7 +215,7 @@ export const liveData = [
     mallName: '네이버 쇼핑라이브',
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg',
-    title: 'Sintel',
+    title: '7Sintel',
   },
   {
     id: 8,
@@ -224,6 +224,6 @@ export const liveData = [
     mallLink: 'https://view.shoppinglive.naver.com/lives/252682',
     videoImage:
       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg',
-    title: 'Subaru Outback On Street And Dirt',
+    title: '8Subaru Outback On Street And Dirt',
   },
 ];

@@ -4,12 +4,12 @@ import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 import './index.scss';
 
 type LiveProps = {
-  loading: boolean;
   title: string;
   videoImage: string;
   videoSource: string;
   mallName: string;
   mallLink: string;
+  loading: boolean;
 };
 
 function Live(props: LiveProps) {
@@ -19,21 +19,25 @@ function Live(props: LiveProps) {
     setMuted(true);
   }, [props]);
 
-  const onMuted = () => {
+  const onOffMuted = () => {
+    setMuted(false);
+  };
+
+  const onToggleMeted = () => {
     setMuted(prev => !prev);
   };
 
   return (
-    <div className="live__item">
+    <>
       <div className="item__header">
         <div className="flex items-start justify-between">
           <h1 className="w-3/4 mb-2 text-lg font-semibold text-white">{props.title}</h1>
-          <button className="text-white" onClick={onMuted}>
+          <button className="text-white" onClick={onToggleMeted}>
             {muted ? <VolumeOffIcon /> : <VolumeOnIcon />}
           </button>
         </div>
         {muted && (
-          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onMuted}>
+          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onOffMuted}>
             <i className="mr-2">
               <VolumeOffIcon />
             </i>
@@ -47,7 +51,7 @@ function Live(props: LiveProps) {
           style={{
             backgroundImage: `url(${props.videoImage})`,
           }}></div>
-        <div className="video-container">
+        <div className={`video-container ${false ? 'z-10' : 'z-0'}`}>
           <video autoPlay={true} muted={muted} src={props.videoSource}></video>
         </div>
       </div>
@@ -59,7 +63,7 @@ function Live(props: LiveProps) {
           <BagIcon />
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
