@@ -6,19 +6,19 @@ import { login } from '../../utils/auth';
 function Login() {
   const history = useHistory();
 
-  const [Email, setEmail] = useState<string>("");
-  const [Password, setPassword] = useState<string>("");
+  const [Email, setEmail] = useState<string>('');
+  const [Password, setPassword] = useState<string>('');
 
-  const onEmailHandler = (event: any) => {
-    setEmail(event.currentTarget.value);
+  const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
   }
 
-  const onPasswordHandler = (event: any) => {
-    setPassword(event.currentTarget.value);
+  const onPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
   }
 
-  const onSubmitHandler = async (event: any) => {
-    event.preventDefault();
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     
     /**
      * 로그인 시도
