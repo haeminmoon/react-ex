@@ -1,69 +1,75 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { liveData } from '~/constants/mock';
 
 import LiveItem from '~/components/Live';
 
 function Live() {
-  const [palyItem, setPlayItem] = useState<number>(0);
-  const [startX, setStartX] = useState<number>(0);
+  const REQUIRED_MOVED_X = 150;
+  let startX: number = 0;
+
+  const [videoState, setVideoState] = useState<boolean>(true);
+  const [playItem, setPlayItem] = useState<number>(0);
 
   const ref = useRef<HTMLDivElement>(null);
-  const playLive = liveData[palyItem];
-  const prevLive = palyItem === 0 ? liveData[liveData.length - 1] : liveData[palyItem - 1];
-  const nextLive = palyItem === liveData.length - 1 ? liveData[0] : liveData[palyItem + 1];
-
+  const playLive = liveData[playItem];
+  
   const saveStartX = (e: any) => {
-    setStartX(e.pageX || e.touches[0].pageX);
+    startX = e.touches[0].pageX;
   };
 
   const endEvent = (e: any) => {
-    if (startX > (e.pageX || e.changedTouches[0].pageX)) {
-      if (palyItem === liveData.length - 1) {
-        // 마지막 라이브일 때
-        return setPlayItem(0);
-      }
+    const movedTouchX = Math.abs(startX - e.changedTouches[0].pageX);
+
+    if (
+      startX > e.changedTouches[0].pageX && 
+      movedTouchX > REQUIRED_MOVED_X &&
+      playItem !== liveData.length - 1
+    ) {
+      /**
+       * 드래그 방향 [ <- ]
+       * 마지막 아이템 체크
+       */
       setPlayItem(prev => prev + 1);
-    } else {
-      if (palyItem === 0) {
-        // 첫 라이브일 때
-        return setPlayItem(liveData.length - 1);
-      }
+      setVideoState(true);
+    } else if (
+      startX < e.changedTouches[0].pageX && 
+      movedTouchX > REQUIRED_MOVED_X &&
+      playItem !== 0
+    ) {
+      /**
+       * 드래그 방향 [ -> ]
+       * 첫번째 아이템 체크
+       */
       setPlayItem(prev => prev - 1);
+      setVideoState(true);
     }
   };
 
   useEffect(() => {
-    // PC
-    ref.current?.addEventListener('mousedown', saveStartX);
-    ref.current?.addEventListener('mouseup', endEvent);
+    if (!videoState) {
+      ref.current?.addEventListener('touchstart', saveStartX);
+      ref.current?.addEventListener('touchend', endEvent);
 
-    // 모바일
-    ref.current?.addEventListener('touchstart', saveStartX);
-    ref.current?.addEventListener('touchend', endEvent);
-
-    return () => {
-      ref.current?.removeEventListener('mousedown', saveStartX);
-      ref.current?.removeEventListener('mouseup', endEvent);
-
-      // 모바일
-      ref.current?.removeEventListener('touchstart', saveStartX);
-      ref.current?.removeEventListener('touchend', endEvent);
-    };
-  }, [startX]);
+      return () => {
+        ref.current?.removeEventListener('touchstart', saveStartX);
+        ref.current?.removeEventListener('touchend', endEvent);
+      };
+    }
+  }, [playItem, videoState]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
       <div className="w-full h-full flicking-container" ref={ref}>
-        {/* <img src={prevLive?.videoImage} alt={prevLive?.title} className="w-full h-full" /> */}
         <LiveItem
           loading={false}
+          id={playLive.id}
           title={playLive.title}
           videoImage={playLive.videoImage}
           videoSource={playLive.videoSource}
           mallName={playLive.mallName}
           mallLink={playLive.mallLink}
+          setVideoState={setVideoState}
         />
-        {/* <img src={nextLive?.videoImage} alt={nextLive?.title} className="w-full h-full" /> */}
       </div>
     </div>
   );

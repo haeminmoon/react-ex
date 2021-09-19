@@ -1,22 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 
 import './index.scss';
 
 type LiveProps = {
   loading: boolean;
+  id: number;
   title: string;
   videoImage: string;
   videoSource: string;
   mallName: string;
   mallLink: string;
+  setVideoState: any;
 };
 
 function Live(props: LiveProps) {
+  const videoDelayTime: number = 1500;
+  const video = useRef<HTMLVideoElement>(null);
+
   const [muted, setMuted] = useState<boolean>(true);
 
   useEffect(() => {
+    /**
+     * 음소거
+     */
     setMuted(true);
+
+    /**
+     * 비디오 딜레이 설정
+     */
+    if (video.current?.paused) {
+      const videoDelay = setTimeout(() => {
+        video.current?.play(); 
+        props.setVideoState(video.current?.paused);
+        clearTimeout(videoDelay);
+      }, videoDelayTime);
+    }
   }, [props]);
 
   const onMuted = () => {
@@ -42,13 +61,8 @@ function Live(props: LiveProps) {
         )}
       </div>
       <div className="item__container">
-        <div
-          className="preview_image"
-          style={{
-            backgroundImage: `url(${props.videoImage})`,
-          }}></div>
-        <div className="video-container">
-          <video autoPlay={true} muted={muted} src={props.videoSource}></video>
+        <div className="video-container">          
+          <video id={`video_${props.id}`} poster={props.videoImage} muted={muted} src={props.videoSource} ref={video}></video>
         </div>
       </div>
       <div className="item__bottom">
