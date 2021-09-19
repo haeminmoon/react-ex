@@ -1,3 +1,5 @@
+import Attachment from '~/components/Attachment';
+
 import { useHistory, withRouter } from 'react-router-dom';
 import { logout } from '../../utils/auth';
 
@@ -14,6 +16,10 @@ function Loggedin() {
       <button onClick={onLogoutHandler}>
         로그아웃
       </button>
+
+      <br /><br /><br />
+      
+      <Attachment />
     </div>
 
   );
