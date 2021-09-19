@@ -1,114 +1,82 @@
 import { useEffect, useRef, useState } from 'react';
-import { liveData } from '~/constants/mock';
+import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 
-import Flicking, { ReadyEvent } from '@egjs/react-flicking';
-import '@egjs/react-flicking/dist/flicking.css';
-import '@egjs/flicking-plugins/dist/pagination.css';
+import './index.scss';
 
-import LiveItem from '~/components/Live';
+type LiveProps = {
+  loading: boolean;
+  id: number;
+  title: string;
+  videoImage: string;
+  videoSource: string;
+  mallName: string;
+  mallLink: string;
+  setVideoState: any;
+};
 
-function Live() {
-  const [playItem, setPlayItem] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  // const [startX, setStartX] = useState<number>(0);
+function Live(props: LiveProps) {
+  const videoDelayTime: number = 1500;
+  const video = useRef<HTMLVideoElement>(null);
 
-  const ref = useRef<HTMLDivElement>(null);
-  const flicking = useRef<Flicking>(null);
+  const [muted, setMuted] = useState<boolean>(true);
 
-  const playLive = liveData[playItem];
-  const prevLive = playItem === 0 ? liveData[liveData.length - 1] : liveData[playItem - 1];
-  const nextLive = playItem === liveData.length - 1 ? liveData[0] : liveData[playItem + 1];
+  useEffect(() => {
+    /**
+     * 음소거
+     */
+    setMuted(true);
 
-  useEffect(() => {}, [playItem]);
-
-  const onChangeLive = (e: any) => {
-    if (!e.isTrusted) {
-      // 사용자가 직접한 행동이 아니라면 리턴
-      return;
+    /**
+     * 비디오 딜레이 설정
+     */
+    if (video.current?.paused) {
+      const videoDelay = setTimeout(() => {
+        video.current?.play();
+        props.setVideoState(video.current?.paused);
+        clearTimeout(videoDelay);
+      }, videoDelayTime);
     }
-    console.log(e);
-    const direction = e.direction;
+  }, [props]);
 
-    if (direction === 'NEXT') {
-      if (playItem === liveData.length - 1) {
-        // 마지막 라이브일 때
-        setPlayItem(0);
-      }
-      setPlayItem(prev => prev + 1);
-    } else {
-      if (playItem === 0) {
-        // 첫 라이브일 때
-        setPlayItem(liveData.length - 1);
-      }
-      setPlayItem(prev => prev - 1);
-    }
-
-    flicking.current?.moveTo(1);
+  const onMuted = () => {
+    setMuted(prev => !prev);
   };
-  // const saveStartX = (e: any) => {
-  //   setStartX(e.pageX || e.touches[0].pageX);
-  // };
-
-  // const endEvent = (e: any) => {
-  //   const start = Math.floor(startX);
-  //   const end = Math.floor(e.pageX || e.changedTouches[0].pageX);
-
-  //   console.log('🚀 ~ endEvent ~ Math.abs(start - end)', Math.abs(start - end));
-  //   if (Math.abs(start - end) < 5) {
-  //     return;
-  //   }
-
-  //   if (startX > (e.pageX || e.changedTouches[0].pageX)) {
-  //     if (playItem === liveData.length - 1) {
-  //       // 마지막 라이브일 때
-  //       return setPlayItem(0);
-  //     }
-  //     setPlayItem(prev => prev + 1);
-  //   } else {
-  //     if (playItem === 0) {
-  //       // 첫 라이브일 때
-  //       return setPlayItem(liveData.length - 1);
-  //     }
-  //     setPlayItem(prev => prev - 1);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // PC
-  //   ref.current?.addEventListener('mousedown', saveStartX);
-  //   ref.current?.addEventListener('mouseup', endEvent);
-
-  //   // 모바일
-  //   ref.current?.addEventListener('touchstart', saveStartX);
-  //   ref.current?.addEventListener('touchend', endEvent);
-
-  //   return () => {
-  //     ref.current?.removeEventListener('mousedown', saveStartX);
-  //     ref.current?.removeEventListener('mouseup', endEvent);
-
-  //     // 모바일
-  //     ref.current?.removeEventListener('touchstart', saveStartX);
-  //     ref.current?.removeEventListener('touchend', endEvent);
-  //   };
-  // }, [startX]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
-      <div className="w-full h-full" ref={ref}>
-        <Flicking className="h-full" onChanged={onChangeLive} defaultIndex={1} ref={flicking}>
-          <img src={prevLive?.videoImage} className="object-cover w-full h-full" alt={prevLive?.title} />
-          <div className="relative w-full h-full ">
-            <LiveItem
-              loading={false}
-              title={playLive.title}
-              videoImage={playLive.videoImage}
-              videoSource={playLive.videoSource}
-              mallName={playLive.mallName}
-              mallLink={playLive.mallLink}
-            />
-          </div>
-          <img src={nextLive?.videoImage} className="object-cover w-full h-full" alt={nextLive?.title} />
-        </Flicking>
+    <div className="live__item">
+      <div className="item__header">
+        <div className="flex items-start justify-between">
+          <h1 className="w-3/4 mb-2 text-lg font-semibold text-white">{props.title}</h1>
+          <button className="text-white" onClick={onMuted}>
+            {muted ? <VolumeOffIcon /> : <VolumeOnIcon />}
+          </button>
+        </div>
+        {muted && (
+          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onMuted}>
+            <i className="mr-2">
+              <VolumeOffIcon />
+            </i>
+            소리를 켜려면 누르세요.
+          </button>
+        )}
+      </div>
+      <div className="item__container">
+        <div className="video-container">
+          <video
+            id={`video_${props.id}`}
+            poster={props.videoImage}
+            muted={muted}
+            src={props.videoSource}
+            ref={video}></video>
+        </div>
+      </div>
+      <div className="item__bottom">
+        <button className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md shadow-md">
+          {props.mallName}으로 이동하기
+        </button>
+        <button className="w-10 text-red-600 align-middle bg-white rounded-full">
+          <BagIcon />
+        </button>
       </div>
     </div>
   );
