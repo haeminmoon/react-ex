@@ -8,3 +8,4 @@ export { default as CloseIcon } from '@material-ui/icons/CloseOutlined';
 export { default as VolumeOffIcon } from '@material-ui/icons/VolumeOffOutlined';
 export { default as VolumeOnIcon } from '@material-ui/icons/VolumeUpOutlined';
 export { default as BagIcon } from '@material-ui/icons/LocalMallOutlined';
+export { default as UpIcon } from '@material-ui/icons/ArrowUpward';
