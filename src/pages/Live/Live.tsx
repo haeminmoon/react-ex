@@ -1,82 +1,75 @@
 import { useEffect, useRef, useState } from 'react';
-import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
+import { liveData } from '~/constants/mock';
 
-import './index.scss';
+import LiveItem from '~/components/Live';
+import { Box, CircularProgress } from '@material-ui/core';
 
-type LiveProps = {
-  loading: boolean;
-  id: number;
-  title: string;
-  videoImage: string;
-  videoSource: string;
-  mallName: string;
-  mallLink: string;
-  setVideoState: any;
-};
+function Live() {
+  const REQUIRED_MOVED_X = 150;
+  let startX: number = 0;
 
-function Live(props: LiveProps) {
-  const videoDelayTime: number = 1500;
-  const video = useRef<HTMLVideoElement>(null);
+  const [videoState, setVideoState] = useState<boolean>(true);
+  const [playItem, setPlayItem] = useState<number>(0);
 
-  const [muted, setMuted] = useState<boolean>(true);
+  const ref = useRef<HTMLDivElement>(null);
+  const playLive = liveData[playItem];
 
-  useEffect(() => {
-    /**
-     * 음소거
-     */
-    setMuted(true);
-
-    /**
-     * 비디오 딜레이 설정
-     */
-    if (video.current?.paused) {
-      const videoDelay = setTimeout(() => {
-        video.current?.play();
-        props.setVideoState(video.current?.paused);
-        clearTimeout(videoDelay);
-      }, videoDelayTime);
-    }
-  }, [props]);
-
-  const onMuted = () => {
-    setMuted(prev => !prev);
+  const saveStartX = (e: any) => {
+    startX = e.touches[0].pageX;
   };
 
+  const endEvent = (e: any) => {
+    const movedTouchX = Math.abs(startX - e.changedTouches[0].pageX);
+
+    if (startX > e.changedTouches[0].pageX && movedTouchX > REQUIRED_MOVED_X && playItem !== liveData.length - 1) {
+      /**
+       * 드래그 방향 [ <- ]
+       * 마지막 아이템 체크
+       */
+      setPlayItem(prev => prev + 1);
+      setVideoState(true);
+    } else if (startX < e.changedTouches[0].pageX && movedTouchX > REQUIRED_MOVED_X && playItem !== 0) {
+      /**
+       * 드래그 방향 [ -> ]
+       * 첫번째 아이템 체크
+       */
+      setPlayItem(prev => prev - 1);
+      setVideoState(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!videoState) {
+      ref.current?.addEventListener('touchstart', saveStartX);
+      ref.current?.addEventListener('touchend', endEvent);
+
+      return () => {
+        ref.current?.removeEventListener('touchstart', saveStartX);
+        ref.current?.removeEventListener('touchend', endEvent);
+      };
+    }
+  }, [playItem, videoState]);
+
   return (
-    <div className="live__item">
-      <div className="item__header">
-        <div className="flex items-start justify-between">
-          <h1 className="w-3/4 mb-2 text-lg font-semibold text-white">{props.title}</h1>
-          <button className="text-white" onClick={onMuted}>
-            {muted ? <VolumeOffIcon /> : <VolumeOnIcon />}
-          </button>
-        </div>
-        {muted && (
-          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onMuted}>
-            <i className="mr-2">
-              <VolumeOffIcon />
-            </i>
-            소리를 켜려면 누르세요.
-          </button>
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+      <div className="w-full h-full" ref={ref}>
+        {/* Loading box */}
+        {videoState && (
+          <Box
+            sx={{ display: 'flex' }}
+            className="absolute top-0 left-0 z-50 items-center justify-center w-full h-full bg-black bg-opacity-50">
+            <CircularProgress color="inherit" className="mb-10 text-white" />
+          </Box>
         )}
-      </div>
-      <div className="item__container">
-        <div className="video-container">
-          <video
-            id={`video_${props.id}`}
-            poster={props.videoImage}
-            muted={muted}
-            src={props.videoSource}
-            ref={video}></video>
-        </div>
-      </div>
-      <div className="item__bottom">
-        <button className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md shadow-md">
-          {props.mallName}으로 이동하기
-        </button>
-        <button className="w-10 text-red-600 align-middle bg-white rounded-full">
-          <BagIcon />
-        </button>
+        <LiveItem
+          id={playLive.id}
+          title={playLive.title}
+          videoImage={playLive.videoImage}
+          videoSource={playLive.videoSource}
+          mallName={playLive.mallName}
+          mallLink={playLive.mallLink}
+          setVideoState={setVideoState}
+        />
       </div>
     </div>
   );
