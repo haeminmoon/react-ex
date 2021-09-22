@@ -63,6 +63,9 @@ function Feed({ categoryId }: FeedProps) {
   async function fetchPrevData() {
     pastCurrentPage.current++;
     const data = await callGetAllPastLive();
+    if (data.length === 0) {
+      return;
+    }
     setPastData(prevData => [...prevData, ...data]);
   }
 
