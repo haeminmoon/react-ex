@@ -13,8 +13,8 @@ function Live() {
   const prevRef = useRef<HTMLImageElement>(null);
   const nextRef = useRef<HTMLImageElement>(null);
   const playLive = liveData[playItem];
-  const prevLive = liveData[otherItem - 1];
-  const nextLive = liveData[otherItem + 1];
+  const prevLive = liveData[playItem - 1];
+  const nextLive = liveData[playItem + 1];
 
   useEffect(() => {
     const REQUIRED_MOVED_X = 150;
@@ -33,7 +33,8 @@ function Live() {
          * 마지막 아이템 체크
          */
 
-        // nextRef.current!.style.transform = `translateX(0)`;
+        nextRef.current!.style.transition = `all .5s`;
+        nextRef.current!.style.transform = `translateX(0)`;
 
         setPlayItem(prev => prev + 1);
         setVideoState(true);
@@ -97,7 +98,7 @@ function Live() {
           mallName={playLive.mallName}
           mallLink={playLive.mallLink}
           setVideoState={setVideoState}
-          setOtherItem={() => setOtherItem(playItem)}
+          // setOtherItem={() => setOtherItem(playItem)}
         />
         {nextLive && (
           <img
@@ -105,8 +106,7 @@ function Live() {
             src={nextLive.videoImage}
             alt="다음 방송 이미지"
             className={`
-              absolute top-0 left-0 z-20 w-full h-full transform translate-x-full transition-all duration-500 opacity-0
-              ${videoState ? 'live-translate-x-0 ' : 'transition-none'}
+              absolute top-0 left-0 z-40 w-full h-full transform translate-x-full transition-all duration-500
             `}
           />
         )}

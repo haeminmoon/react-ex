@@ -11,7 +11,7 @@ type LiveProps = {
   mallName: string;
   mallLink: string;
   setVideoState: any;
-  setOtherItem: () => void;
+  // setOtherItem: () => void;
 };
 
 function Live(props: LiveProps) {
@@ -33,7 +33,7 @@ function Live(props: LiveProps) {
       const videoDelay = setTimeout(() => {
         video.current?.play();
         props.setVideoState(video.current?.paused);
-        props.setOtherItem();
+        // props.setOtherItem();
         clearTimeout(videoDelay);
       }, videoDelayTime);
     }
