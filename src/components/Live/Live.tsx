@@ -64,15 +64,15 @@ function Live(props: LiveProps, ref: React.Ref<HTMLImageElement>) {
         )}
       </div>
       <div className="item__container">
+        <video id={`video_${props.id}`} muted={muted} src={props.videoSource} ref={video} />
         <img
           ref={ref}
-          className={`video_preview z-30 ${
+          className={`video_preview ${
             !video.current ? 'opacity-100' : video.current?.paused ? 'opacity-100' : 'opacity-0'
           }`}
           src={props.videoImage}
           alt={props.title}
         />
-        <video id={`video_${props.id}`} muted={muted} src={props.videoSource} ref={video} />
       </div>
       <div className="item__bottom">
         <button className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md shadow-md">
