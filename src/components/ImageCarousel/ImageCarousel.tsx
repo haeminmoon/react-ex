@@ -22,7 +22,7 @@ function ImageCarousel({ resources }: ImageCarouselProps) {
   ];
 
   return (
-    <Flicking circular={true} plugins={_plugins} autoResize={true}>
+    <Flicking plugins={_plugins} circular autoResize preventClickOnDrag moveType="snap" inputType={['touch']}>
       {resources?.map((resource, index) => (
         <div className="w-full bg-gray-100 h-52" key={`${resource.event}-${index}`}>
           <a href={resource.link} key={resource.link} className="block w-full h-full">
