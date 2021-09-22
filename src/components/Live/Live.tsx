@@ -11,6 +11,7 @@ type LiveProps = {
   mallName: string;
   mallLink: string;
   setVideoState: any;
+  setOtherItem: () => void;
 };
 
 function Live(props: LiveProps) {
@@ -32,6 +33,7 @@ function Live(props: LiveProps) {
       const videoDelay = setTimeout(() => {
         video.current?.play();
         props.setVideoState(video.current?.paused);
+        props.setOtherItem();
         clearTimeout(videoDelay);
       }, videoDelayTime);
     }
@@ -65,7 +67,7 @@ function Live(props: LiveProps) {
       </div>
       <div className="item__container">
         <img
-          className={`video_preview ${
+          className={`video_preview z-30 ${
             !video.current ? 'opacity-100' : video.current?.paused ? 'opacity-100' : 'opacity-0'
           }`}
           src={props.videoImage}
