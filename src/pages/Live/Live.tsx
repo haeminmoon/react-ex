@@ -7,14 +7,11 @@ import LiveItem from '~/components/Live';
 function Live() {
   const [videoState, setVideoState] = useState<boolean>(true);
   const [playItem, setPlayItem] = useState<number>(0);
-  const [otherItem, setOtherItem] = useState<number>(0);
+
+  const playLive = liveData[playItem];
 
   const ref = useRef<HTMLDivElement>(null);
-  const prevRef = useRef<HTMLImageElement>(null);
-  const nextRef = useRef<HTMLImageElement>(null);
-  const playLive = liveData[playItem];
-  const prevLive = liveData[playItem - 1];
-  const nextLive = liveData[playItem + 1];
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const REQUIRED_MOVED_X = 150;
@@ -32,19 +29,25 @@ function Live() {
          * 드래그 방향 [ <- ]
          * 마지막 아이템 체크
          */
-
-        nextRef.current!.style.transition = `all .5s`;
-        nextRef.current!.style.transform = `translateX(0)`;
-
-        setPlayItem(prev => prev + 1);
-        setVideoState(true);
+        imgRef.current!.style.transform = `translateX(100%)`;
+        const animateDelay = setTimeout(() => {
+          setPlayItem(prev => prev + 1);
+          setVideoState(true);
+          swipeAnimtion();
+          clearTimeout(animateDelay);
+        }, 500);
       } else if (startX < e.changedTouches[0].pageX && movedTouchX > REQUIRED_MOVED_X && playItem !== 0) {
         /**
          * 드래그 방향 [ -> ]
          * 첫번째 아이템 체크
          */
-        setPlayItem(prev => prev - 1);
-        setVideoState(true);
+        imgRef.current!.style.transform = `translateX(-100%)`;
+        const animateDelay = setTimeout(() => {
+          setPlayItem(prev => prev - 1);
+          setVideoState(true);
+          swipeAnimtion();
+          clearTimeout(animateDelay);
+        }, 500);
       }
     };
 
@@ -58,6 +61,11 @@ function Live() {
       };
     }
   }, [playItem, videoState]);
+
+  const swipeAnimtion = () => {
+    imgRef.current!.style.transition = `all .5s`;
+    imgRef.current!.style.transform = `translateX(0)`;
+  };
 
   useEffect(() => {
     return () => {
@@ -75,22 +83,8 @@ function Live() {
             <CircularProgress color="inherit" className="mb-10 text-white" />
           </LoadingBox>
         )}
-        {prevLive && (
-          <img
-            ref={prevRef}
-            src={prevLive.videoImage}
-            alt="이전 방송 이미지"
-            className={`
-              absolute top-0 left-0 z-20 w-full h-full transform
-              ${
-                videoState
-                  ? 'opacity-100 translate-x-0 transition-all duration-500'
-                  : 'opacity-0 -translate-x-full transition-none'
-              }
-            `}
-          />
-        )}
         <LiveItem
+          ref={imgRef}
           id={playLive.id}
           title={playLive.title}
           videoImage={playLive.videoImage}
@@ -98,18 +92,7 @@ function Live() {
           mallName={playLive.mallName}
           mallLink={playLive.mallLink}
           setVideoState={setVideoState}
-          // setOtherItem={() => setOtherItem(playItem)}
         />
-        {nextLive && (
-          <img
-            ref={nextRef}
-            src={nextLive.videoImage}
-            alt="다음 방송 이미지"
-            className={`
-              absolute top-0 left-0 z-40 w-full h-full transform translate-x-full transition-all duration-500
-            `}
-          />
-        )}
       </div>
     </div>
   );

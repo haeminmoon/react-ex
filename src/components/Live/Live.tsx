@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 
 import './index.scss';
@@ -11,10 +11,9 @@ type LiveProps = {
   mallName: string;
   mallLink: string;
   setVideoState: any;
-  // setOtherItem: () => void;
 };
 
-function Live(props: LiveProps) {
+function Live(props: LiveProps, ref: React.Ref<HTMLImageElement>) {
   const videoDelayTime: number = 2000;
   const video = useRef<HTMLVideoElement>(null);
 
@@ -33,7 +32,6 @@ function Live(props: LiveProps) {
       const videoDelay = setTimeout(() => {
         video.current?.play();
         props.setVideoState(video.current?.paused);
-        // props.setOtherItem();
         clearTimeout(videoDelay);
       }, videoDelayTime);
     }
@@ -67,6 +65,7 @@ function Live(props: LiveProps) {
       </div>
       <div className="item__container">
         <img
+          ref={ref}
           className={`video_preview z-30 ${
             !video.current ? 'opacity-100' : video.current?.paused ? 'opacity-100' : 'opacity-0'
           }`}
@@ -87,4 +86,4 @@ function Live(props: LiveProps) {
   );
 }
 
-export default Live;
+export default forwardRef<HTMLImageElement, LiveProps>(Live);
