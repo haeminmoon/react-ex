@@ -27,7 +27,13 @@ function LiveItem({ live }: LiveItemProps) {
     <div className="w-full overflow-hidden rounded-lg shadow-md h-36" key={live.id}>
       <Link to="/" className="flex h-full">
         <div className="h-full w-36">
-          <LazyLoadImage effect="blur" src={live.thumbnail} alt={live.title} className="object-cover w-full h-full" />
+          <LazyLoadImage
+            effect="blur"
+            src={live.thumbnail}
+            alt={live.title}
+            height="100%"
+            className="object-cover w-full h-full"
+          />
         </div>
         <div className="flex-1">
           <div className="flex flex-col justify-between h-full px-3 py-4 text-sm">
