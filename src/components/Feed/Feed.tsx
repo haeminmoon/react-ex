@@ -1,7 +1,7 @@
 import LiveItem from '../LiveItem';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { UpIcon } from '~/assets/icons';
-import { getAllLive } from '~/utils/live';
+import { getAllLive, getAllPrevLive } from '~/utils/live';
 
 type FeedProps = {
   categoryId?: number;
@@ -23,16 +23,15 @@ type LiveType = {
 function Feed({ categoryId }: FeedProps) {
   const currentPage = useRef(1);
   const totalPage = useRef(0);
+
   const [data, setData] = useState<LiveType[]>([]);
-
-  const pastCurrentPage = useRef(0);
-  const pastTotalPage = useRef(0);
   const [pastData, setPastData] = useState<LiveType[]>([]);
+  const [showPast, setShowPast] = useState(false);
 
-  const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const innerBoxRef = useRef<HTMLDivElement>(null);
+  const pastSignRef = useRef<HTMLDivElement>(null);
 
   async function callGetAllLive() {
     const response = await getAllLive({
@@ -45,28 +44,24 @@ function Feed({ categoryId }: FeedProps) {
   }
 
   async function callGetAllPastLive() {
-    const response = await getAllLive({
-      page: +pastCurrentPage.current,
-      limit: 4,
+    const response = await getAllPrevLive({
       ...(categoryId && { categoryId }),
     });
-    pastTotalPage.current = response.totalPage;
     return response.list;
   }
 
   async function fetchNextData() {
     currentPage.current++;
     const data = await callGetAllLive();
-    setData(prevData => [...data, ...prevData]);
+    setData(prevData => [...prevData, ...data]);
   }
 
   async function fetchPrevData() {
-    pastCurrentPage.current++;
     const data = await callGetAllPastLive();
     if (data.length === 0) {
       return;
     }
-    setPastData(prevData => [...prevData, ...data]);
+    setPastData(data);
   }
 
   async function fetchFilterCategotyData() {
@@ -96,7 +91,6 @@ function Feed({ categoryId }: FeedProps) {
       new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            console.log(totalPage.current, currentPage.current);
             if (totalPage.current === currentPage.current) return;
             fetchNextData();
           }
@@ -105,27 +99,21 @@ function Feed({ categoryId }: FeedProps) {
     [currentPage, totalPage]
   );
 
-  const prevObserver = useMemo(
-    () =>
-      new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            console.log('prev');
-            fetchPrevData();
-          }
-        });
-      }),
-    []
-  );
-
   useEffect(() => {
+    async function fetchData() {
+      const results: PromiseSettledResult<LiveType[]>[] = await Promise.allSettled([
+        callGetAllLive(),
+        callGetAllPastLive(),
+      ]);
+
+      results[0].status === 'fulfilled' && setData(results[0].value);
+      results[1].status === 'fulfilled' && setPastData(results[1].value);
+    }
+
     if (categoryId) {
       fetchFilterCategotyData();
+      fetchPrevData();
     } else {
-      async function fetchData() {
-        const data = await callGetAllLive();
-        setData(data);
-      }
       fetchData();
     }
   }, [categoryId]);
@@ -133,43 +121,43 @@ function Feed({ categoryId }: FeedProps) {
   useEffect(() => {
     if (!items) return;
     if (!nextRef.current) return;
-    if (!prevRef.current) return;
 
     const nextEl = nextRef.current;
-    const prevEl = prevRef.current;
-
     nextObserver.observe(nextEl);
-    prevObserver.observe(prevEl);
 
     return () => {
       nextObserver.unobserve(nextEl);
-      prevObserver.unobserve(prevEl);
     };
-  }, [nextObserver, prevObserver, items]);
+  }, [nextObserver, items]);
 
   useEffect(() => {
     let startY: number;
+    let tempBodyHeight: number;
 
-    boxRef.current?.addEventListener('touchstart', e => {
-      const touchobj = e.changedTouches[0];
-      startY = touchobj.pageY;
-    });
-    boxRef.current?.addEventListener('touchmove', e => {
-      const touchobj = e.changedTouches[0];
-      const dist = startY - touchobj.pageY;
-      if (dist > 0) return;
-      innerBoxRef.current!.style.transform = `translateY(0px)`;
-    });
+    // boxRef.current?.addEventListener('touchstart', e => {
+    //   const touchobj = e.changedTouches[0];
+    //   startY = touchobj.pageY;
+
+    //   tempBodyHeight = document.body.offsetHeight - 274;
+    // });
+    // const event = boxRef.current?.addEventListener('touchmove', e => {
+    //   const touchobj = e.changedTouches[0];
+    //   const dist = startY - touchobj.pageY;
+    //   if (dist > 0) return;
+    //   innerBoxRef.current!.style.transform = `translateY(0)`;
+    //   setShowPast(true);
+    //   window.scrollTo({ top: document.body.offsetHeight - tempBodyHeight });
+    // });
   }, []);
 
+  // className="transition-all duration-500 ease-linear transform -translate-y-24"
   return (
-    <section className="p-6 overflow-hidden" ref={boxRef}>
-      <div className="transition-all duration-500 ease-linear transform -translate-y-28" ref={innerBoxRef}>
-        <div ref={prevRef}></div>
-        <div className="grid gap-6">
+    <section className="p-6 overflow-auto h-3/5 " ref={boxRef}>
+      <div ref={innerBoxRef}>
+        {/* <div className="grid gap-6 mb-8">
           {pastItems && pastItems.map(live => <LiveItem live={live} key={`past-${live.id}`} />)}
-        </div>
-        <div className="my-8 text-center">
+        </div> */}
+        <div className="mb-10 text-center past-live-view" ref={pastSignRef}>
           <i>
             <UpIcon />
           </i>
