@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 export type live = {
   id: number;
   title: string;
@@ -28,10 +30,11 @@ function LiveItem({ live }: LiveItemProps) {
       <Link to="/" className="flex h-full">
         <div className="h-full w-36">
           <LazyLoadImage
-            effect="blur"
             src={live.thumbnail}
             alt={live.title}
             height="100%"
+            effect="blur"
+            threshold={100}
             className="object-cover w-full h-full"
           />
         </div>
