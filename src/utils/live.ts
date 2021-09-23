@@ -17,3 +17,17 @@ export async function getAllLive({ page, limit, categoryId }: getAllLiveParams) 
 
   return response.data;
 }
+
+type getAllPrevLiveParams = {
+  categoryId?: number;
+};
+
+export async function getAllPrevLive({ categoryId }: getAllPrevLiveParams) {
+  const response = await axiosClient.get('/api/prev_live', {
+    data: {
+      ...{ categoryId },
+    },
+  });
+
+  return response.data;
+}
