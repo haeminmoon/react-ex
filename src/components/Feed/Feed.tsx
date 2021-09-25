@@ -21,17 +21,20 @@ type LiveType = {
 };
 
 function Feed({ categoryId }: FeedProps) {
+  const REQUIRED_MOVED_Y = 50;
+
   const currentPage = useRef(1);
   const totalPage = useRef(0);
 
   const [data, setData] = useState<LiveType[]>([]);
   const [pastData, setPastData] = useState<LiveType[]>([]);
-  const [showPast, setShowPast] = useState(false);
+  const [showPastArea, setShowPastArea] = useState(false);
+  const [showPastItems, setShowPastItems] = useState(false);
 
   const nextRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
-  const innerBoxRef = useRef<HTMLDivElement>(null);
-  const pastSignRef = useRef<HTMLDivElement>(null);
+  const pastRef = useRef<HTMLDivElement>(null);
+  const pastAreaRef = useRef<HTMLDivElement>(null);
 
   async function callGetAllLive() {
     const response = await getAllLive({
@@ -129,35 +132,44 @@ function Feed({ categoryId }: FeedProps) {
       nextObserver.unobserve(nextEl);
     };
   }, [nextObserver, items]);
-
+  
   useEffect(() => {
+    
     let startY: number;
-    let tempBodyHeight: number;
+    
+    boxRef.current?.addEventListener('touchstart', e => {
+      const touchobj = e.changedTouches[0];
+      startY = touchobj.pageY;
+    });
 
-    // boxRef.current?.addEventListener('touchstart', e => {
-    //   const touchobj = e.changedTouches[0];
-    //   startY = touchobj.pageY;
+    boxRef.current?.addEventListener('touchend', e => {
+      if (window.scrollY === 0 && showPastArea === false) {
+        const touchobj = e.changedTouches[0];
+        const dist = Math.abs(startY - touchobj.pageY);
 
-    //   tempBodyHeight = document.body.offsetHeight - 274;
-    // });
-    // const event = boxRef.current?.addEventListener('touchmove', e => {
-    //   const touchobj = e.changedTouches[0];
-    //   const dist = startY - touchobj.pageY;
-    //   if (dist > 0) return;
-    //   innerBoxRef.current!.style.transform = `translateY(0)`;
-    //   setShowPast(true);
-    //   window.scrollTo({ top: document.body.offsetHeight - tempBodyHeight });
-    // });
+        if (dist > REQUIRED_MOVED_Y) {
+          setShowPastArea(true);
+          
+          window.scrollTo(0, 0);
+          const pastItemsSettingDelay = setTimeout(() => {
+            setShowPastItems(true);
+            window.scrollTo(0, pastRef.current!.offsetHeight + pastAreaRef.current!.offsetHeight + 250);
+            clearTimeout(pastItemsSettingDelay);
+          }, 1000);
+        }
+      }
+    });
+
+
   }, []);
 
-  // className="transition-all duration-500 ease-linear transform -translate-y-24"
   return (
     <section className="p-6 overflow-auto h-3/5 " ref={boxRef}>
-      <div ref={innerBoxRef}>
-        {/* <div className="grid gap-6 mb-8">
+      <div>
+        <div className={"grid gap-6 mb-8 " + (showPastItems ? '' : 'hidden')} ref={pastRef}>
           {pastItems && pastItems.map(live => <LiveItem live={live} key={`past-${live.id}`} />)}
-        </div> */}
-        <div className="mb-10 text-center past-live-view" ref={pastSignRef}>
+        </div>
+        <div className={"mb-10 text-center past-live-view " + (showPastArea ? '' : 'hidden')} ref={pastAreaRef}>
           <i>
             <UpIcon />
           </i>
