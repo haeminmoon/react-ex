@@ -142,6 +142,9 @@ function Feed({ categoryId }: FeedProps) {
     });
 
     boxRef.current?.addEventListener('touchend', e => {
+      const isHidden = pastRef.current?.classList?.contains('hidden');
+      if (!isHidden) return;
+
       if (window.scrollY === 0 && showPastArea === false) {
         const touchobj = e.changedTouches[0];
         const dist = Math.abs(startY - touchobj.pageY);
