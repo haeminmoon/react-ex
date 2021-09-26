@@ -152,7 +152,7 @@ function Feed({ categoryId }: FeedProps) {
           window.scrollTo(0, 0);
           const pastItemsSettingDelay = setTimeout(() => {
             setShowPastItems(true);
-            window.scrollTo(0, pastRef.current!.offsetHeight + pastAreaRef.current!.offsetHeight - 15);
+            window.scrollTo(0, pastRef.current!.offsetHeight + pastAreaRef.current!.offsetHeight - 18);
             clearTimeout(pastItemsSettingDelay);
           }, 1000);
         }
