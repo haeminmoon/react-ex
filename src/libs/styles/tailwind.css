@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .filter-button {
-  @apply py-1 px-6 border-black border rounded-md font-semibold;
+  @apply px-6 py-1 font-semibold border border-black rounded-md;
 }

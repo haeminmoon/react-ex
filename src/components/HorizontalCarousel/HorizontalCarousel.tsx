@@ -6,7 +6,7 @@ type HorizontalCarouselProps = {
 
 function HorizontalCarousel({ children }: HorizontalCarouselProps) {
   return (
-    <Flicking bound={true} horizontal={true} autoResize={true} moveType="snap">
+    <Flicking autoInit autoResize horizontal bound moveType="snap">
       {children}
     </Flicking>
   );

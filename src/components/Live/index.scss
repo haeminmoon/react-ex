@@ -13,30 +13,24 @@
   top: 0;
   padding: 20px;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0) 100%);
-  z-index: 20;
+  z-index: 40;
 }
 
 .item__container {
   width: 100%;
   height: 100%;
-  .preview_image {
-    position: absolute;
+  video {
     width: 100%;
     height: 100%;
-    background-position: center;
-    background-size: cover;
-    z-index: 5;
+    object-fit: cover;
   }
-  .video-container {
+  .video_preview {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10;
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    z-index: 30;
   }
 }
 
@@ -48,5 +42,5 @@
   padding: 20px;
   bottom: 72px;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0) 100%);
-  z-index: 20;
+  z-index: 40;
 }

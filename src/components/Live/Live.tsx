@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { BagIcon, VolumeOffIcon, VolumeOnIcon } from '~/assets/icons';
 
 import './index.scss';
 
 type LiveProps = {
-  loading: boolean;
   id: number;
   title: string;
   videoImage: string;
@@ -14,8 +13,8 @@ type LiveProps = {
   setVideoState: any;
 };
 
-function Live(props: LiveProps) {
-  const videoDelayTime: number = 1500;
+function Live(props: LiveProps, ref: React.Ref<HTMLImageElement>) {
+  const videoDelayTime: number = 2000;
   const video = useRef<HTMLVideoElement>(null);
 
   const [muted, setMuted] = useState<boolean>(true);
@@ -31,14 +30,18 @@ function Live(props: LiveProps) {
      */
     if (video.current?.paused) {
       const videoDelay = setTimeout(() => {
-        video.current?.play(); 
+        video.current?.play();
         props.setVideoState(video.current?.paused);
         clearTimeout(videoDelay);
       }, videoDelayTime);
     }
   }, [props]);
 
-  const onMuted = () => {
+  const onOffMuted = () => {
+    setMuted(false);
+  };
+
+  const onToggleMeted = () => {
     setMuted(prev => !prev);
   };
 
@@ -47,12 +50,12 @@ function Live(props: LiveProps) {
       <div className="item__header">
         <div className="flex items-start justify-between">
           <h1 className="w-3/4 mb-2 text-lg font-semibold text-white">{props.title}</h1>
-          <button className="text-white" onClick={onMuted}>
+          <button className="text-white" onClick={onToggleMeted}>
             {muted ? <VolumeOffIcon /> : <VolumeOnIcon />}
           </button>
         </div>
         {muted && (
-          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onMuted}>
+          <button className="px-4 py-2 text-sm text-white bg-black rounded-full bg-opacity-20" onClick={onOffMuted}>
             <i className="mr-2">
               <VolumeOffIcon />
             </i>
@@ -61,9 +64,15 @@ function Live(props: LiveProps) {
         )}
       </div>
       <div className="item__container">
-        <div className="video-container">          
-          <video id={`video_${props.id}`} poster={props.videoImage} muted={muted} src={props.videoSource} ref={video}></video>
-        </div>
+        <video id={`video_${props.id}`} muted={muted} src={props.videoSource} ref={video} />
+        <img
+          ref={ref}
+          className={`video_preview ${
+            !video.current ? 'opacity-100' : video.current?.paused ? 'opacity-100' : 'opacity-0'
+          }`}
+          src={props.videoImage}
+          alt={props.title}
+        />
       </div>
       <div className="item__bottom">
         <button className="flex-1 px-4 py-2 font-semibold text-white bg-red-600 rounded-md shadow-md">
@@ -77,4 +86,4 @@ function Live(props: LiveProps) {
   );
 }
 
-export default Live;
+export default forwardRef<HTMLImageElement, LiveProps>(Live);

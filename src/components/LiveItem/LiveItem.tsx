@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export type live = {
   id: number;
@@ -23,13 +26,20 @@ function LiveItem({ live }: LiveItemProps) {
   };
 
   return (
-    <div className="w-full h-36 rounded-lg shadow-md overflow-hidden" key={live.id}>
+    <div className="w-full overflow-hidden rounded-lg shadow-md h-36" key={live.id}>
       <Link to="/" className="flex h-full">
-        <div className="w-36 h-full">
-          <img src={live.thumbnail} alt={live.title} className="w-full h-full object-cover" />
+        <div className="h-full w-36">
+          <LazyLoadImage
+            src={live.thumbnail}
+            alt={live.title}
+            height="100%"
+            effect="blur"
+            threshold={100}
+            className="object-cover w-full h-full"
+          />
         </div>
         <div className="flex-1">
-          <div className="h-full py-4 px-3 text-sm flex flex-col justify-between">
+          <div className="flex flex-col justify-between h-full px-3 py-4 text-sm">
             <img src={live.supplier?.logo} alt={live.supplier?.name} className="w-14" />
             <p>{live.title}</p>
             <p className={`${isLive() ? 'text-red-500' : 'text-gray-500'}`}>{isLive() ? 'LIVE' : '방송종료'}</p>
