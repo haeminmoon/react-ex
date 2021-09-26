@@ -16,8 +16,10 @@ function Home() {
   return (
     <>
       <Header />
-      <ImageCarousel resources={eventBanners} />
-      <Categries categoryId={+categoryId} onFilterModal={() => setFilterVisible(true)} />
+      <div className="sticky left-0 z-50 top-16">
+        <ImageCarousel resources={eventBanners} />
+        <Categries categoryId={+categoryId} onFilterModal={() => setFilterVisible(true)} />
+      </div>
       <Feed categoryId={+categoryId} />
       {filterVisible && <FilterModal visible={filterVisible} onClose={() => setFilterVisible(false)} />}
     </>

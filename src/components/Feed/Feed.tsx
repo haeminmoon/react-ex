@@ -132,11 +132,10 @@ function Feed({ categoryId }: FeedProps) {
       nextObserver.unobserve(nextEl);
     };
   }, [nextObserver, items]);
-  
+
   useEffect(() => {
-    
     let startY: number;
-    
+
     boxRef.current?.addEventListener('touchstart', e => {
       const touchobj = e.changedTouches[0];
       startY = touchobj.pageY;
@@ -149,35 +148,31 @@ function Feed({ categoryId }: FeedProps) {
 
         if (dist > REQUIRED_MOVED_Y) {
           setShowPastArea(true);
-          
+
           window.scrollTo(0, 0);
           const pastItemsSettingDelay = setTimeout(() => {
             setShowPastItems(true);
-            window.scrollTo(0, pastRef.current!.offsetHeight + pastAreaRef.current!.offsetHeight + 250);
+            window.scrollTo(0, pastRef.current!.offsetHeight + pastAreaRef.current!.offsetHeight - 15);
             clearTimeout(pastItemsSettingDelay);
           }, 1000);
         }
       }
     });
-
-
   }, []);
 
   return (
     <section className="p-6 overflow-auto h-3/5 " ref={boxRef}>
-      <div>
-        <div className={"grid gap-6 mb-8 " + (showPastItems ? '' : 'hidden')} ref={pastRef}>
-          {pastItems && pastItems.map(live => <LiveItem live={live} key={`past-${live.id}`} />)}
-        </div>
-        <div className={"mb-10 text-center past-live-view " + (showPastArea ? '' : 'hidden')} ref={pastAreaRef}>
-          <i>
-            <UpIcon />
-          </i>
-          <p>지난방송</p>
-        </div>
-        <div className="grid gap-6">{items && items.map(live => <LiveItem live={live} key={live.id} />)}</div>
-        {data.length !== 0 && <div ref={nextRef}></div>}
+      <div className={'grid gap-6 mb-8 ' + (showPastItems ? '' : 'hidden')} ref={pastRef}>
+        {pastItems && pastItems.map(live => <LiveItem live={live} key={`past-${live.id}`} />)}
       </div>
+      <div className={'mb-10 text-center past-live-view ' + (showPastArea ? '' : 'hidden')} ref={pastAreaRef}>
+        <i>
+          <UpIcon />
+        </i>
+        <p>지난방송</p>
+      </div>
+      <div className="grid gap-6">{items && items.map(live => <LiveItem live={live} key={live.id} />)}</div>
+      {data.length !== 0 && <div ref={nextRef}></div>}
     </section>
   );
 }

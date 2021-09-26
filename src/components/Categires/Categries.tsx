@@ -11,14 +11,13 @@ type CategriesProps = {
 
 function Categries({ categoryId, onFilterModal }: CategriesProps) {
   return (
-    <div className="flex min-w-full pl-2 border-b border-gray-200">
+    <div className="flex min-w-full pl-2 bg-white border-b border-gray-200">
       <HorizontalCarousel>
         {categories.map(category => (
           <Link
             to={`/home?category=${category.id}`}
             key={category.category}
-            className={`p-4 ${category.id === (categoryId ?? 1) ? 'text-red-500 font-semibold' : 'text-black'}`}
-          >
+            className={`p-4 ${category.id === (categoryId ?? 1) ? 'text-red-500 font-semibold' : 'text-black'}`}>
             {category.text}
           </Link>
         ))}
