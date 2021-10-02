@@ -4,6 +4,7 @@ import { Pagination, AutoPlay } from '@egjs/flicking-plugins';
 import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/pagination.css';
 import './index.scss';
+import { useEffect, useRef } from 'react';
 
 type Resource = {
   src: string;
@@ -16,13 +17,20 @@ type ImageCarouselProps = {
 };
 
 function ImageCarousel({ resources }: ImageCarouselProps) {
-  const _plugins = [
-    new Pagination({ type: 'bullet' }),
-    new AutoPlay({ duration: 3000, direction: 'NEXT', stopOnHover: true }),
-  ];
+  const ref = useRef<Flicking | null>(null);
+
+  useEffect(() => {
+    ref.current?.addPlugins(
+      new Pagination({ type: 'bullet' }),
+      new AutoPlay({ duration: 3000, direction: 'NEXT', stopOnHover: true })
+    );
+    return () => {
+      ref.current = null;
+    };
+  }, []);
 
   return (
-    <Flicking plugins={_plugins} circular autoResize preventClickOnDrag moveType="snap">
+    <Flicking circular autoResize preventClickOnDrag moveType="snap" ref={ref}>
       {resources?.map((resource, index) => (
         <div className="w-full bg-gray-100 h-52" key={`${resource.event}-${index}`}>
           <a href={resource.link} key={resource.link} className="block w-full h-full">

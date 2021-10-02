@@ -16,7 +16,7 @@ function Categries({ categoryId, onFilterModal }: CategriesProps) {
         {categories.map(category => (
           <Link
             to={`/home?category=${category.id}`}
-            key={category.category}
+            key={category.id}
             className={`p-4 ${category.id === (categoryId ?? 1) ? 'text-red-500 font-semibold' : 'text-black'}`}>
             {category.text}
           </Link>
